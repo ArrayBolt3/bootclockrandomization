@@ -3,6 +3,15 @@
 ## Copyright (C) 2012 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
 ## See the file COPYING for copying conditions.
 
+# shellcheck source=../../../helper-scripts/usr/libexec/helper-scripts/check_runtime.bsh
+source /usr/libexec/helper-scripts/check_runtime.bsh
+
+if was_executed "${BASH_SOURCE[0]}"; then
+  bootclockrandomization_was_sourced='false'
+else
+  bootclockrandomization_was_sourced='true'
+fi
+
 error_handler() {
   local exit_code="$?"
   printf '%s\n' "ERROR: exit_code: $exit_code | BASH_COMMAND: $BASH_COMMAND"
@@ -85,8 +94,8 @@ get_random_time() {
     error "PLUS_OR_MINUS is either plus nor minus."
   fi
 
-  if [ "${BASH_SOURCE[0]}" != "${0}" ]; then
-    ## Only needed if executed by 'clock-random-manual-cli'.
+  if [ "${bootclockrandomization_was_sourced}" = 'true' ]; then
+    ## Only needed if sourced by 'clock-random-manual-cli'.
     NEW_TIME_HUMAN="$(LC_ALL=C date --date "@$NEW_TIME_UNIXTIME")"
   fi
 }
@@ -123,7 +132,7 @@ bootclockrandomization () {
   return 0
 }
 
-if [ "${BASH_SOURCE[0]}" != "${0}" ]; then
+if [ "${bootclockrandomization_was_sourced}" = 'true' ]; then
   true "INFO: Script was sourced."
 else
   true "INFO: Script was executed."
