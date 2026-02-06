@@ -1,3 +1,22 @@
+commit 150770885aebfb1688a1a8dbfc5b479f6da7d1ee
+Merge: 3dcb534 86ebc62
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Feb 6 04:50:20 2026 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 86ebc629817a660e381db6731195d6cc420d2066
+Author: Aaron Rainbolt <arraybolt3@gmail.com>
+Date:   Thu Feb 5 23:42:13 2026 -0600
+
+    Allow bootclockrandomization to use helper-scripts' check_runtime.bsh library
+
+commit 3dcb534e147746d2f4832b15edaeb77dea3df5b3
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Feb 4 10:28:45 2026 +0000
+
+    bumped changelog version
+
 commit ff88a72302bf8361410a342f76080d6e7cb656f0
 Merge: eae6dcc f41d91d
 Author: Patrick Schleizer <adrelanos@whonix.org>
