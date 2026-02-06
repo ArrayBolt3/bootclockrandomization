@@ -25,6 +25,8 @@ profile bootclockrandomization /usr/bin/bootclockrandomization flags=(attach_dis
   /usr/bin/od mrix,
   /usr/bin/shuf mrix,
 
+  /usr/libexec/helper-scripts/check_runtime.bsh r,
+
   owner /etc/nsswitch.conf r,
   owner /etc/passwd r,
 
