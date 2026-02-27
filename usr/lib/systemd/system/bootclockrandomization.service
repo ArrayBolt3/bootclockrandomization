@@ -20,6 +20,7 @@ ConditionVirtualization=!systemd-nspawn
 [Service]
 Type=oneshot
 RemainAfterExit=yes
+ExecCondition=/usr/libexec/helper-scripts/has_netvm_on_qubes
 ExecStart=/usr/bin/bootclockrandomization
 
 [Install]
