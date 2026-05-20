@@ -1,3 +1,9 @@
+commit 109b2eae9b6e64cac6dc509dc5cca5e924023d24
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Feb 27 10:47:43 2026 +0000
+
+    bumped changelog version
+
 commit d98bd811c36efb129a67eb6c0d96aef019b8b3c4
 Merge: a244181 603b226
 Author: Patrick Schleizer <adrelanos@whonix.org>
@@ -389,7 +395,7 @@ Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sat Nov 11 13:41:27 2023 -0500
 
     change license to AGPL-3+
-    
+
     https://forums.whonix.org/t/license-change-to-agplv3/17455
 
 commit db79ab5c6faf2a5508590c4ff83eba5803b32857
@@ -403,9 +409,9 @@ Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sun Oct 22 08:25:01 2023 -0400
 
     Lower amount of boot clock randomization seconds in Qubes Template to +/-1 (and nanoseconds).
-    
+
     Because sdwdate (or other time fixing mechanism) does not yet run in Template.
-    
+
     https://forums.whonix.org/t/whonix-ws-16-template-fails-to-update-due-to-timing-issue/12739/31
 
 commit 6ea29198cb91f2ebd21fb3ec019c62b36b038555
@@ -584,7 +590,7 @@ Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Fri Dec 24 07:35:00 2021 -0500
 
     Merge pull request #2 from deeplow/delay-as-env-var
-    
+
     Make delay_plus_or_minus overridable via env var
 
 commit 1837346b080132d3f7ca8dac81d13d489cfa2662
@@ -688,7 +694,7 @@ Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Mon Mar 15 06:41:08 2021 -0400
 
     apparmor
-    
+
     AVC apparmor="DENIED" operation="open" profile="bootclockrandomization" name="/dev/tty" comm="stop" requested_mask="wr" denied_mask="wr"
     AVC apparmor="DENIED" operation="open" profile="bootclockrandomization" name="/dev/tty" comm="start" requested_mask="wr" denied_mask="wr"
 
@@ -733,9 +739,9 @@ Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Thu Apr 9 10:47:35 2020 +0000
 
     no more standalone log /var/run/bootclockrandomization.log
-    
+
     logs now handled by systemd
-    
+
     no longer depend on logrotate
 
 commit 150cda8871cfaa29e06a51f0dd318acffb74040c
@@ -810,15 +816,15 @@ Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Tue Mar 31 07:27:12 2020 -0400
 
     skip starting inside systemd-nspawn container
-    
+
     systemd-nspawn does not allow clock to be changed inside the container.
-    
+
     Quote https://www.freedesktop.org/software/systemd/man/systemd-nspawn.html
-    
-    The host’s network interfaces and the system clock may not be changed from within the container.
-    
+
+    The host_s network interfaces and the system clock may not be changed from within the container.
+
     https://forums.whonix.org/t/bootclockrandomization-always-moving-clock-plus-or-5-seconds/2200/10
-    
+
     ConditionVirtualization=!systemd-nspawn
 
 commit 4b54edcb30564c163c7faa774891cc536b5ab7e7
@@ -832,7 +838,7 @@ Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Thu Oct 31 16:48:55 2019 +0000
 
     apparmor fixes
-    
+
     https://forums.whonix.org/t/apparmor-for-complete-system-including-init-pid1-systemd-everything-full-system-mac-policy/8339/72
 
 commit 525465d446ffbbbc289ad29705b74e796dc9e435
@@ -860,7 +866,7 @@ Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Sun Oct 27 05:55:00 2019 +0000
 
     Merge pull request #1 from madaidan/apparmor
-    
+
     Add AppArmor profile
 
 commit 5ad08c3209cfc62d18143c22176c8b59344ae2e6
@@ -1030,18 +1036,18 @@ Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Fri Mar 1 14:31:50 2019 +0000
 
     add improved legal protections clauses
-    
+
     The license for software created by Whonix is the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version with additional terms applicable per GNU GPL version 3 section 7.
-    
+
     The additional terms are based on the Doom 3 license which is Debian refers to as `GPL-3+-with-id-software-additional-terms`, which is Debian DFSG [1] (The Debian Free Software Guidelines) approved and which is therefore suitable for Debian `main`. Whonix made applied minimal changes to it:
-    
+
     * Rewrite `The Doom 3 BFG Edition GPL Source Code` to the more common `this program` which is used throughout the GPL.
     * Added a "trump clause" [2], in other words, any conflicts or disputes between the additional terms and the GPLv3 shall be resolved in favor of the GPLv3 by adding `Notwithstanding any other provision of this License` (as mentioned in GPL FAQ [3]) at the beginning of the additional terms.
-    
+
     [1] https://www.debian.org/social_contract#guidelines
     [2] https://www.fsf.org/news/canonical-updated-licensing-terms
     [3] https://www.gnu.org/licenses/gpl-faq.html#v3Notwithstanding
-    
+
     For more considerations, see also:
     https://www.whonix.org/wiki/Dev/Licensing
 
@@ -1104,7 +1110,7 @@ Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Fri Jan 12 18:02:44 2018 +0000
 
     sudoers hardening
-    
+
     let clock-random tolls require sudo
 
 commit 66ffba77b24fbdff6c802a1010ee7a5a6f88b95b
@@ -1118,7 +1124,7 @@ Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Tue Feb 21 22:12:09 2017 +0000
 
     remove no longer required sudoers exception
-    
+
     https://phabricator.whonix.org/T637
 
 commit 670fd303410ebe3314214603464491570bfdbb1b
@@ -1144,7 +1150,7 @@ Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Fri Feb 10 15:47:50 2017 +0000
 
     remove faketime from Build-Depends:
-    
+
     since no longer used for reproducible builds
 
 commit a760d6c1c378523b4cc79e019037c537c44316c1
@@ -1212,7 +1218,7 @@ Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Sun Sep 4 19:58:15 2016 +0000
 
     added clock-random-manual-gui tool to manually set the clock as fallback
-    
+
     https://phabricator.whonix.org/T533
 
 commit 93367e59057c45533ceae51559a7bc5a80f87cfc
@@ -1220,9 +1226,9 @@ Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Sun Sep 4 18:51:37 2016 +0000
 
     added clock-random-manual-cli tool to manually set the clock as fallback
-    
+
     refactoring
-    
+
     https://phabricator.whonix.org/T533
 
 commit 90619dc2d6154577dcacadaa3194e467c8aba4c2
@@ -1248,9 +1254,9 @@ Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Sun Mar 13 00:50:43 2016 +0000
 
     no longer exclude +/- 5 seconds range to avoid fingerprinting negative correlation
-    
+
     Thanks to @marmarek for the suggestion!
-    
+
     https://github.com/QubesOS/qubes-issues/issues/1764#issuecomment-195619793
 
 commit cb72e2c46d9dfa0f818e5df2f23b18bb0c508d85
