@@ -1,3 +1,30 @@
+commit 9b4e27da3e67948ba8ae57373129aab2b609c0eb
+Merge: 4ca7f4f 95fea1e
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Jul 21 05:59:18 2026 -0400
+
+    Merge remote-tracking branch 'refs/remotes/org-ai-assisted/master'
+
+commit 95fea1edc20a5c7f4d408da2b55539140425ed5e
+Author: assisted-by-ai (Bot Account) (Machine Account) <228987186+assisted-by-ai@users.noreply.github.com>
+Date:   Sun Jul 19 04:13:31 2026 -0400
+
+    bootclockrandomization: use .py names for msgcollector/tb-updater libexec scripts (#1)
+
+    The Python libexec scripts now ship only under their <name>.py names (compat
+    symlinks removed upstream in msgcollector/tb-updater); update the
+    /usr/libexec/... call sites here to match.
+
+    AI-Assisted
+
+    Co-authored-by: claude (dev95 d7769525-599d-4781-9f2c-f21aa34d292d) <noreply@anthropic.com>
+
+commit 4ca7f4f9d1915757af1fd4b443cf46b5637c7d65
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed May 20 21:58:26 2026 +0000
+
+    bumped changelog version
+
 commit 59a454282b20eb2bc6aa9b9ca43bdc567abba44c
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Wed May 20 16:56:41 2026 -0400
