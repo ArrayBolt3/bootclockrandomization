@@ -4,7 +4,7 @@
 ## See the file COPYING for copying conditions.
 
 # shellcheck source=../../../helper-scripts/usr/libexec/helper-scripts/check_runtime.bsh
-source /usr/libexec/helper-scripts/check_runtime.bsh
+source "${HELPER_SCRIPTS_PATH:-}"/usr/libexec/helper-scripts/check_runtime.bsh
 
 if was_executed "${BASH_SOURCE[0]}"; then
   bootclockrandomization_was_sourced='false'
@@ -14,7 +14,7 @@ fi
 
 error_handler() {
   local exit_code="$?"
-  printf '%s\n' "ERROR: exit_code: $exit_code | BASH_COMMAND: $BASH_COMMAND"
+  printf '%s\n' "ERROR: exit_code: ${exit_code} | BASH_COMMAND: ${BASH_COMMAND}"
   exit 1
 }
 
@@ -47,7 +47,7 @@ get_random_time() {
   ## 38653957
 
   ## Add leading zeros, because `date` expects 9 digits.
-  NANOSECONDS="$(printf '%0*d\n' 9 "$NANOSECONDS")"
+  NANOSECONDS="$(printf '%0*d\n' 9 "${NANOSECONDS}")"
 
   ## Using
   ## printf '%0*d\n' 9 "38653957"
@@ -59,36 +59,36 @@ get_random_time() {
   ## 117752805
   ## 038653957
 
-  if [ "$ZERO_OR_ONE" = "0" ]; then
+  if [ "${ZERO_OR_ONE}" = "0" ]; then
     PLUS_OR_MINUS="-"
-  elif [ "$ZERO_OR_ONE" = "1" ]; then
+  elif [ "${ZERO_OR_ONE}" = "1" ]; then
     PLUS_OR_MINUS="+"
   else
-    printf '%s\n' "ERROR: ZERO_OR_ONE is neither 0 nor 1, it's: $ZERO_OR_ONE"
+    printf '%s\n' "ERROR: ZERO_OR_ONE is neither 0 nor 1, it's: ${ZERO_OR_ONE}"
     printf '%s\n' "       Please report this bug!"
     return 2
   fi
 
-  printf '%s\n' "$PLUS_OR_MINUS $DELAY $NANOSECONDS"
+  printf '%s\n' "${PLUS_OR_MINUS} ${DELAY} ${NANOSECONDS}"
 
   ## OLD_TIME_HUMAN will be set when called by clock-random-manual-cli.
   ## OLD_TIME_HUMAN will not be set when called by bootclockrandomization.
-  if [ "$OLD_TIME_HUMAN" = "" ]; then
+  if [ "${OLD_TIME_HUMAN}" = "" ]; then
     OLD_TIME_HUMAN="$(LC_ALL=C date)"
-    true "Setting OLD_TIME_HUMAN to $OLD_TIME_HUMAN."
+    true "Setting OLD_TIME_HUMAN to ${OLD_TIME_HUMAN}."
     OLD_TIME_NANOSECONDS="$(LC_ALL=C date +%s.%N)"
     OLD_UNIXTIME="$(LC_ALL=C date +%s)"
   else
-    true "OLD_TIME_HUMAN already set to $OLD_TIME_HUMAN."
-    OLD_TIME_NANOSECONDS="$(LC_ALL=C date --date "$OLD_TIME_HUMAN" +%s.%N)"
-    OLD_UNIXTIME="$(LC_ALL=C date --date "$OLD_TIME_HUMAN" +%s)"
+    true "OLD_TIME_HUMAN already set to ${OLD_TIME_HUMAN}."
+    OLD_TIME_NANOSECONDS="$(LC_ALL=C date --date "${OLD_TIME_HUMAN}" +%s.%N)"
+    OLD_UNIXTIME="$(LC_ALL=C date --date "${OLD_TIME_HUMAN}" +%s)"
   fi
 
   ## shellcheck does not like using a variable ('PLUS_OR_MINUS')
   ## as arithmetic symbol.
-  if [ "$PLUS_OR_MINUS" = "+" ]; then
+  if [ "${PLUS_OR_MINUS}" = "+" ]; then
      NEW_TIME_UNIXTIME="$(( OLD_UNIXTIME + DELAY ))"
-  elif [ "$PLUS_OR_MINUS" = "-" ]; then
+  elif [ "${PLUS_OR_MINUS}" = "-" ]; then
     NEW_TIME_UNIXTIME="$(( OLD_UNIXTIME - DELAY ))"
   else
     error "PLUS_OR_MINUS is either plus nor minus."
@@ -96,7 +96,7 @@ get_random_time() {
 
   if [ "${bootclockrandomization_was_sourced}" = 'true' ]; then
     ## Only needed if sourced by 'clock-random-manual-cli'.
-    NEW_TIME_HUMAN="$(LC_ALL=C date --date "@$NEW_TIME_UNIXTIME")"
+    NEW_TIME_HUMAN="$(LC_ALL=C date --date "@${NEW_TIME_UNIXTIME}")"
   fi
 }
 
@@ -116,7 +116,7 @@ bootclockrandomization () {
   get_random_time
 
   ## Set new time. Syntax: LC_ALL=C date --set @1396733199.112834496
-  LC_ALL=C date --set "@$NEW_TIME_UNIXTIME.$NANOSECONDS" > /dev/null
+  LC_ALL=C date --set "@${NEW_TIME_UNIXTIME}.${NANOSECONDS}" > /dev/null
 
   ## Testing the `date` syntax:
   ## sudo LC_ALL=C date --set @1396733199.112834496 ; LC_ALL=C date +%s.%N
@@ -126,7 +126,7 @@ bootclockrandomization () {
   ## Sat Apr  5 21:26:39 UTC 2014
   ## 1396733199.114122807
 
-  printf '%s\n' "Changed time from $OLD_TIME_HUMAN ($OLD_TIME_NANOSECONDS)"
+  printf '%s\n' "Changed time from ${OLD_TIME_HUMAN} (${OLD_TIME_NANOSECONDS})"
   printf '%s\n' "               to $(LC_ALL=C date) ($(LC_ALL=C date +%s.%N))."
 
   return 0
@@ -136,9 +136,12 @@ if [ "${bootclockrandomization_was_sourced}" = 'true' ]; then
   true "INFO: Script was sourced."
 else
   true "INFO: Script was executed."
-  set -e
+  set -o errexit
   set -o errtrace
   set -o pipefail
+  shopt -s inherit_errexit
+  shopt -s shift_verbose
+  export LC_ALL=C
   trap "error_handler" ERR
   bootclockrandomization
 fi
